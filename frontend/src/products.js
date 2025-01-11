@@ -1,7 +1,7 @@
 const products = [
   {
     _id: "1",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -14,7 +14,7 @@ const products = [
   },
   {
     _id: "2",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -27,7 +27,7 @@ const products = [
   },
   {
     _id: "3",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -40,7 +40,7 @@ const products = [
   },
   {
     _id: "4",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -53,7 +53,7 @@ const products = [
   },
   {
     _id: "5",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -66,7 +66,7 @@ const products = [
   },
   {
     _id: "6",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -79,7 +79,7 @@ const products = [
   },
   {
     _id: "7",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -92,7 +92,7 @@ const products = [
   },
   {
     _id: "8",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -105,7 +105,7 @@ const products = [
   },
   {
     _id: "9",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",
@@ -118,7 +118,7 @@ const products = [
   },
   {
     _id: "10",
-    name: "Airpods",
+    name: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     image: "/images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quam velit labore vel, soluta sequi autem nisi blanditiis quasi ut",

@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import { EnvConfiguration } from "./config/envConfig";
-import products from "./data/products";
+import products from "@data/products";
 
 const PORT = EnvConfiguration().port;
 

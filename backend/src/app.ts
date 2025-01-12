@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import { EnvConfiguration } from "./config/envConfig";
 import products from "@data/products";
+import "./config/db";
 
 const PORT = EnvConfiguration().port;
 

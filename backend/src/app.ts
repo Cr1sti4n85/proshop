@@ -1,10 +1,8 @@
 import express, { Application } from "express";
-import { loadEnvFile } from "process";
+import { EnvConfiguration } from "./config/envConfig";
 import products from "./data/products";
 
-loadEnvFile();
-
-const PORT = process.env.PORT || "4000";
+const PORT = EnvConfiguration().port;
 
 const app: Application = express();
 

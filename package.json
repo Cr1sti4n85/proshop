@@ -6,7 +6,9 @@
   "scripts": {
     "server": "tsx backend/src/app.ts",
     "client": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "tsx backend/src/seeder.ts",
+    "seed:destroy": "tsx backend/src/seeder.ts -d"
   },
   "author": "Cristian Perez",
   "license": "ISC",

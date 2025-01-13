@@ -8,7 +8,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   async find(): Promise<Product[]> {
-    return await ProductModel.find().populate("roles").exec(); //con exec retorna solo los datos
+    return await ProductModel.find().exec();
   }
 
   async findById(id: string): Promise<Product | null> {

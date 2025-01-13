@@ -24,7 +24,7 @@ export interface IProductRepository extends Repository<Product> {}
 export interface IProductService {
   createProduct(data: Product): Promise<Product>;
   findProducts(): Promise<Product[]>;
-  findProductById(id: string): Promise<User | null>;
-  updateProduct(id: string, product: Partial<Product>): Promise<User | null>;
+  findProductById(id: string): Promise<Product | null>;
+  updateProduct(id: string, product: Partial<Product>): Promise<Product | null>;
   deleteProduct(id: string): Promise<boolean>;
 }

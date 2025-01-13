@@ -4,7 +4,7 @@
   "description": "eCommerce app built with MERN",
   "main": "backend/dist/app.js",
   "scripts": {
-    "server": "tsx backend/src/app.ts",
+    "server": "tsx watch backend/src/app.ts",
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "tsx backend/src/seeder.ts",

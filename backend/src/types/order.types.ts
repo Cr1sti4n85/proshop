@@ -10,6 +10,13 @@ export interface OrderItems {
   product: Product["_id"];
 }
 
+export interface ShippingAddress {
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
 export interface PaymentResult {
   id: string;
   status: string;
@@ -19,10 +26,7 @@ export interface PaymentResult {
 export interface Order extends Document {
   user: User["_id"];
   orderItems: OrderItems[];
-  shippingAddress: string;
-  city: string;
-  postalCode: string;
-  country: string;
+  shippingAddress: ShippingAddress;
   paymentMethod: string;
   paymentResult: PaymentResult;
   itemsPrice: number;
@@ -30,7 +34,7 @@ export interface Order extends Document {
   shippingPrice: number;
   totalPrice: number;
   isPaid: boolean;
-  paidAt: Date;
+  paidAt?: Date;
   isDelivered: boolean;
-  deliveredAt: Date;
+  deliveredAt?: Date;
 }

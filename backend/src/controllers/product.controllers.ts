@@ -11,6 +11,9 @@ import asyncHandler from "../middleware/asyncHandler";
 const productRepository: IProductRepository = new ProductRepository();
 const productService: IProductService = new ProductService(productRepository);
 
+// @desc Fetch all produts
+// @route GET /api/products
+// @access Public
 export const findProducts = asyncHandler(
   async (_req: Request, res: Response) => {
     const products = await productService.findProducts();
@@ -24,6 +27,9 @@ export const findProducts = asyncHandler(
   }
 );
 
+// @desc Fetch single product
+// @route GET /api/products/:id
+// @access Public
 export const findProductById = asyncHandler(
   async (req: Request, res: Response) => {
     const product = await productService.findProductById(req.params.id);

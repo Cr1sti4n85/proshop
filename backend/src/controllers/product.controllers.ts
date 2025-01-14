@@ -23,3 +23,17 @@ export const findProducts = asyncHandler(
     res.status(200).json(products);
   }
 );
+
+export const findProductById = asyncHandler(
+  async (req: Request, res: Response) => {
+    const product = await productService.findProductById(req.params.id);
+
+    if (product) {
+      res.status(200).json(product);
+      return;
+    } else {
+      res.status(404);
+      throw new Error("Resource not found");
+    }
+  }
+);

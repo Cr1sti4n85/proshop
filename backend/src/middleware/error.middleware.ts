@@ -7,8 +7,8 @@ const notFound = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const errorHandler = (
-  err: Error,
-  req: Request,
+  err: any,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -16,7 +16,7 @@ const errorHandler = (
   let message = err.message;
 
   //check castError Mongo
-  if (err.name === "CastError") {
+  if (err.name === "CastError" && err.kind === "ObjectId") {
     message = "Resource not found";
     statusCode = 404;
   }

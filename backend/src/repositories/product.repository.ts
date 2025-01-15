@@ -12,13 +12,12 @@ export class ProductRepository implements IProductRepository {
   }
 
   async findById(id: string): Promise<Product | null> {
-    return await ProductModel.findById(id).populate("roles").exec();
+    return await ProductModel.findById(id).exec();
   }
 
   async update(id: string, data: Partial<Product>): Promise<Product | null> {
     return await ProductModel.findByIdAndUpdate(id, data, { new: true })
-      .populate("roles")
-      .exec();
+    .exec();
   }
 
   async delete(id: string): Promise<boolean> {

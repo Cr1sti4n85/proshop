@@ -18,8 +18,6 @@ function HomeScreen() {
   //   fetchProducts();
   // }, []);
 
-  console.log(useGetProductsQuery());
-
   return (
     <>
       {isLoading ? (

@@ -1,33 +1,18 @@
 import { useParams } from "react-router-dom";
-// import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-// import axios from "axios";
 import Rating from "../components/Rating";
+import Loader from "../components/Loader";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import Message from "../components/Message";
 
 function ProductScreen() {
-  // const [product, setProduct] = useState({});
   const { id: productId } = useParams();
-  // const product = products.find((p) => p._id === productId);
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId);
-
-  console.log("aaaa", useGetProductDetailsQuery(productId));
-
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     const { data } = await axios.get(
-  //       `http://localhost:3000/api/products/${productId}`
-  //     );
-  //     setProduct(data);
-  //   };
-
-  //   fetchProduct();
-  // }, [productId]);
 
   return (
     <>
@@ -35,9 +20,11 @@ function ProductScreen() {
         Go back
       </Link>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <div>{error?.data.message || error.error}</div>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <Row>
           <Col md={5}>

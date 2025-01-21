@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import { UserRepository } from "../repositories/user.repository";
 import { UserService } from "../services/user.services";
-import { IUserRepository, IUserService } from "../types/user.types";
+import { IUserRepository, IUserService, User } from "../types/user.types";
 import asyncHandler from "../middleware/asyncHandler";
+import { EnvConfiguration } from "../config/envConfig";
 
 const userRepository: IUserRepository = new UserRepository();
 const userService: IUserService = new UserService(userRepository);
@@ -11,16 +13,32 @@ const userService: IUserService = new UserService(userRepository);
 // @route POST /api/users/login
 // @access Public
 export const authUser = asyncHandler(async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email, password }: User = req.body;
   const user = await userService.findUserByEmail(email);
 
   if (user && (await user.matchPassword(password))) {
+    const token = jwt.sign(
+      { userId: user._id },
+      EnvConfiguration().jwtSecret as string,
+      {
+        expiresIn: "30d",
+      }
+    );
+
+    //Set jwt as http only cookie
+    res.cookie(`jwt-${Date.now()}`, token, {
+      httpOnly: true,
+      secure: EnvConfiguration().NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    });
+
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      // token: null
+      token,
     });
   } else {
     res.status(401);

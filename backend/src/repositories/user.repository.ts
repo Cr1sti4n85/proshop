@@ -17,7 +17,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    return await UserModel.findById(id).exec();
+    return await UserModel.findById(id).select("-password").exec();
   }
 
   async update(id: string, data: Partial<User>): Promise<User | null> {

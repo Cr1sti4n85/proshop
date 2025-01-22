@@ -21,7 +21,8 @@
     "baseUrl": "./backend/src",
     "paths": {
       "@data/*": ["data/*"]
-    }
+    },
+    "typeRoots": ["./backend/@types", "./node_modules/@types"]
   },
   "include": ["backend/src"],
   "exclude": ["node_modules"]

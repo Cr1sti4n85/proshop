@@ -10,17 +10,19 @@ import {
   updateProfile,
   updateUser,
 } from "controllers/user.controller";
+import { protect, admin } from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.route("/").get(getUsers).post(registerUser);
+router.route("/").get(protect, admin, getUsers).post(registerUser);
 
 router.post("/logout", logoutUser);
 
-router.post("/login", authUser);
+router.post("/auth", authUser);
 
-router.route("/profile").get(getProfile).put(updateProfile);
+router.route("/profile").get(protect, getProfile).put(protect, updateProfile);
 
+router.use(protect, admin);
 router.route("/:id").delete(deleteUser).get(getUserById).put(updateUser);
 
 export default router;

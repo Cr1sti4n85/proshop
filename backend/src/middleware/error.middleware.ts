@@ -1,4 +1,5 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import { EnvConfiguration } from "../config/envConfig";
 
 const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`Not found - ${req.originalUrl}`);
@@ -23,7 +24,7 @@ const errorHandler = (
 
   res.status(statusCode).json({
     message,
-    stack: process.env.NODE_ENV === "development" && err.stack,
+    stack: EnvConfiguration().NODE_ENV === "development" && err.stack,
   });
 };
 

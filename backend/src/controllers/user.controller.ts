@@ -18,7 +18,7 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
 
   if (user && (await user.matchPassword(password))) {
     const token = jwt.sign(
-      { userId: user._id },
+      { id: user._id },
       EnvConfiguration().jwtSecret as string,
       {
         expiresIn: "30d",

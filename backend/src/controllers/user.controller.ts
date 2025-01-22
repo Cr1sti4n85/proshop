@@ -26,7 +26,7 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
     );
 
     //Set jwt as http only cookie
-    res.cookie(`jwt-${Date.now()}`, token, {
+    res.cookie("jwt", token, {
       httpOnly: true,
       secure: EnvConfiguration().NODE_ENV !== "development",
       sameSite: "strict",
@@ -59,6 +59,10 @@ export const registerUser = asyncHandler(
 // @route POST /api/users/logout
 // @access Private
 export const logoutUser = asyncHandler(async (_req: Request, res: Response) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
   res.status(200).json({ message: "logout user" });
 });
 

@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import { UserRepository } from "../repositories/user.repository";
 import { UserService } from "../services/user.services";
 import { IUserRepository, IUserService, User } from "../types/user.types";
 import asyncHandler from "../middleware/asyncHandler";
-import { EnvConfiguration } from "../config/envConfig";
+import { generateToken } from "helpers/generateToken";
 
 const userRepository: IUserRepository = new UserRepository();
 const userService: IUserService = new UserService(userRepository);
@@ -16,29 +15,14 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
   const { email, password }: User = req.body;
   const user = await userService.findUserByEmail(email);
 
-  if (user && (await user.matchPassword(password))) {
-    const token = jwt.sign(
-      { id: user._id },
-      EnvConfiguration().jwtSecret as string,
-      {
-        expiresIn: "30d",
-      }
-    );
-
-    //Set jwt as http only cookie
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: EnvConfiguration().NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    });
+  if (user && (await user.matchPassword(password)) && user._id) {
+    generateToken(res, user._id);
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token,
     });
   } else {
     res.status(401);
@@ -50,8 +34,38 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
 // @route POST /api/users
 // @access Public
 export const registerUser = asyncHandler(
-  async (_req: Request, res: Response) => {
-    res.status(200).json({ message: "register user" });
+  async (req: Request, res: Response) => {
+    const { email } = req.body;
+
+    const userExists = await userService.findUserByEmail(email);
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+
+    try {
+      const user = await userService.createUser(req.body);
+      if (user && user._id) {
+        generateToken(res, user._id);
+
+        res.status(201).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+        });
+      }
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(error);
+    }
+
+    //  else {
+    //   console.log(req.body);
+    //   res.status(400);
+    //   throw new Error("Invalid user data");
+    // }
   }
 );
 

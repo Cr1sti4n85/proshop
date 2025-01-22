@@ -10,6 +10,8 @@ export interface User extends Document {
   matchPassword: (password: string) => Promise<boolean>;
 }
 
+// export type registeredUser = Pick<User, "name" | "email" | "password">;
+
 export interface IUserRepository extends Repository<User> {
   findOne(query: Query): Promise<User | null>;
 }

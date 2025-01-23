@@ -10,7 +10,7 @@ export const generateToken = (res: Response, id: object) => {
   //Set jwt as http only cookie
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: EnvConfiguration().NODE_ENV !== "development",
+    secure: false,
     sameSite: "strict",
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });

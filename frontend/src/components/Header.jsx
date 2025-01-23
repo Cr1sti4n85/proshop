@@ -38,12 +38,12 @@ function Header() {
                 <NavDropdown.Item as={Link} to="/profile">
                   Profile
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/logout">
+                <NavDropdown.Item onClick={logoutHandler}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Nav.Link onClick={logoutHandler}>
+              <Nav.Link as={Link} to="/login">
                 <FaUser />
                 Sign In
               </Nav.Link>

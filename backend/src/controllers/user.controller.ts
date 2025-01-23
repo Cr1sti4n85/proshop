@@ -35,7 +35,7 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
 // @access Public
 export const registerUser = asyncHandler(
   async (req: Request, res: Response) => {
-    const { email } = req.body;
+    const { name, email, password } = req.body;
 
     const userExists = await userService.findUserByEmail(email);
 
@@ -44,28 +44,20 @@ export const registerUser = asyncHandler(
       throw new Error("User already exists");
     }
 
-    try {
-      const user = await userService.createUser(req.body);
-      if (user && user._id) {
-        generateToken(res, user._id);
+    const user = await userService.createUser({ name, email, password });
+    if (user && user._id) {
+      generateToken(res, user._id);
 
-        res.status(201).json({
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          isAdmin: user.isAdmin,
-        });
-      }
-    } catch (error: any) {
-      console.log(error);
-      throw new Error(error);
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
     }
-
-    //  else {
-    //   console.log(req.body);
-    //   res.status(400);
-    //   throw new Error("Invalid user data");
-    // }
   }
 );
 
@@ -83,16 +75,52 @@ export const logoutUser = asyncHandler(async (_req: Request, res: Response) => {
 // @desc  Get user profile
 // @route Get /api/users/profile
 // @access Private
-export const getProfile = asyncHandler(async (_req: Request, res: Response) => {
-  res.status(200).json({ message: "Get user profile" });
+export const getProfile = asyncHandler(async (req: Request, res: Response) => {
+  const id = req.currentUser?._id as string;
+  const user = await userService.findUserById(id);
+
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
 });
 
 // @desc  Updte user profile
 // @route PUT /api/users/profile
 // @access Private
 export const updateProfile = asyncHandler(
-  async (_req: Request, res: Response) => {
-    res.status(200).json({ message: "update user profile" });
+  async (req: Request, res: Response) => {
+    const id = req.currentUser?._id as string;
+    const user = await userService.findUserById(id);
+
+    if (user) {
+      user.name = req.body.name || user.name;
+      user.email = req.body.email || user.email;
+
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+
+      const updatedUser = await userService.updateUser(id, user);
+      if (updatedUser) {
+        res.status(200).json({
+          _id: updatedUser?._id,
+          name: updatedUser?.name,
+          email: updatedUser?.email,
+          isAdmin: updatedUser?.isAdmin,
+        });
+      }
+    } else {
+      res.status(404);
+      throw new Error("User not found");
+    }
   }
 );
 

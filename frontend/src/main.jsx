@@ -11,6 +11,7 @@ import "./assets/bootstrap.custom.css";
 import "./assets/index.css";
 import store from "./store";
 import App from "./App";
+import PrivateRoute from "./components/PrivateRoute";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
@@ -24,7 +25,10 @@ const router = createBrowserRouter(
       <Route path="/product/:id" element={<ProductScreen />}></Route>
       <Route path="/cart" element={<CartScreen />}></Route>
       <Route path="/login" element={<LoginScreen />}></Route>
-      <Route path="/shipping" element={<ShippingScreen />}></Route>
+      {/* every route in here will be private */}
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/shipping" element={<ShippingScreen />}></Route>
+      </Route>
     </Route>
   )
 );

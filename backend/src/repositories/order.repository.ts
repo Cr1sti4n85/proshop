@@ -17,7 +17,7 @@ export class OrderRepository implements IOrderRepository {
   }
 
   async findById(id: string): Promise<Order | null> {
-    return await OrderModel.findById(id).exec();
+    return await OrderModel.findById(id).populate("user", "name email").exec();
   }
 
   async update(id: string, data: Partial<Order>): Promise<Order | null> {

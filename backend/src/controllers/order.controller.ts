@@ -67,7 +67,14 @@ export const getMyOrders = asyncHandler(async (req: Request, res: Response) => {
 //@access Private
 export const getOrderById = asyncHandler(
   async (req: Request, res: Response) => {
-    res.send("Get order by ID");
+    const order = await orderService.findOrderById(req.params.id);
+
+    if (!order) {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+
+    res.status(200).json(order);
   }
 );
 

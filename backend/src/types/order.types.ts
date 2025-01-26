@@ -4,6 +4,7 @@ import { Product } from "./product.types";
 import { Repository } from "./repository.types";
 
 export interface OrderItems {
+  _id?: string;
   name: string;
   qty: number;
   image: string;
@@ -29,21 +30,33 @@ export interface Order extends Document {
   orderItems: OrderItems[];
   shippingAddress: ShippingAddress;
   paymentMethod: string;
-  paymentResult: PaymentResult;
+  paymentResult?: PaymentResult;
   itemsPrice: number;
   taxPrice: number;
   shippingPrice: number;
   totalPrice: number;
   isPaid: boolean;
   paidAt?: Date;
-  isDelivered: boolean;
+  isDelivered?: boolean;
   deliveredAt?: Date;
 }
+
+export type currentOrder = Pick<
+  Order,
+  | "orderItems"
+  | "user"
+  | "shippingAddress"
+  | "paymentMethod"
+  | "itemsPrice"
+  | "taxPrice"
+  | "shippingPrice"
+  | "totalPrice"
+>;
 
 export interface IOrderRepository extends Repository<Order> {}
 
 export interface IOrderService {
-  createOrder(data: Order): Promise<Order>;
+  createOrder(data: currentOrder): Promise<Order>;
   findOrders(): Promise<Order[]>;
   findOrderById(id: string): Promise<Order | null>;
   updateOrder(id: string, order: Partial<Order>): Promise<Order | null>;

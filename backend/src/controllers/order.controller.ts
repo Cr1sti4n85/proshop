@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { OrderRepository } from "../repositories/order.repository";
 import { OrderService } from "../services/order.services";
-import { IOrderRepository, IOrderService } from "../types/order.types";
+import {
+  currentOrder,
+  IOrderRepository,
+  IOrderService,
+  Order,
+} from "../types/order.types";
 import asyncHandler from "../middleware/asyncHandler";
 
 const orderRepository: IOrderRepository = new OrderRepository();
@@ -12,8 +17,39 @@ const orderService: IOrderService = new OrderService(orderRepository);
 //@access Private
 export const addOrderItems = asyncHandler(
   async (req: Request, res: Response) => {
-    //   const order = await orderService.createOrder(req.body);
-    res.send("Add order items");
+    let {
+      orderItems,
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+    }: currentOrder = req.body;
+
+    if (orderItems && orderItems.length === 0) {
+      res.status(400);
+      throw new Error("No order items");
+    }
+
+    orderItems = orderItems.map((item) => ({
+      ...item,
+      product: item._id,
+      _id: undefined,
+    }));
+
+    const newOrder = await orderService.createOrder({
+      orderItems,
+      user: req.currentUser._id,
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+    });
+
+    res.status(201).json(newOrder);
   }
 );
 

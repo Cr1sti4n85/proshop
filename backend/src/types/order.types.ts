@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 import { User } from "./user.types";
 import { Product } from "./product.types";
-import { Repository } from "./repository.types";
+import { Query, Repository } from "./repository.types";
 
 export interface OrderItems {
   _id?: string;
@@ -53,10 +53,13 @@ export type currentOrder = Pick<
   | "totalPrice"
 >;
 
-export interface IOrderRepository extends Repository<Order> {}
+export interface IOrderRepository extends Repository<Order> {
+  findOwn(query: Query): Promise<Order[]>;
+}
 
 export interface IOrderService {
   createOrder(data: currentOrder): Promise<Order>;
+  findMyOrders(query: Query): Promise<Order[] | null>;
   findOrders(): Promise<Order[]>;
   findOrderById(id: string): Promise<Order | null>;
   updateOrder(id: string, order: Partial<Order>): Promise<Order | null>;

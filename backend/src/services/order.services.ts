@@ -1,3 +1,4 @@
+import { Query } from "types/repository.types";
 import { IOrderRepository, IOrderService, Order } from "../types/order.types";
 
 export class OrderService implements IOrderService {
@@ -5,6 +6,10 @@ export class OrderService implements IOrderService {
 
   async createOrder(data: Order): Promise<Order> {
     return this.orderRepository.create(data);
+  }
+
+  async findMyOrders(query: Query): Promise<Order[] | null> {
+    return this.orderRepository.findOwn(query);
   }
 
   async findOrders(): Promise<Order[]> {

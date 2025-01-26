@@ -57,7 +57,9 @@ export const addOrderItems = asyncHandler(
 //@route GET /api/orders/myorders
 //@access Private
 export const getMyOrders = asyncHandler(async (req: Request, res: Response) => {
-  res.send("Get my orders");
+  const orders = await orderService.findMyOrders({ user: req.currentUser._id });
+
+  res.status(200).json(orders);
 });
 
 //@desc Get logged in user order by ID

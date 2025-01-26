@@ -1,3 +1,4 @@
+import { Query } from "types/repository.types";
 import OrderModel from "../models/order.model";
 import { IOrderRepository, Order } from "../types/order.types";
 
@@ -9,6 +10,10 @@ export class OrderRepository implements IOrderRepository {
 
   async find(): Promise<Order[]> {
     return await OrderModel.find().exec();
+  }
+
+  async findOwn(query: Query): Promise<Order[]> {
+    return await OrderModel.find(query).exec();
   }
 
   async findById(id: string): Promise<Order | null> {

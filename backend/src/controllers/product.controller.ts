@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { ProductRepository } from "../repositories/product.repository";
 import { ProductService } from "../services/product.services";
-import {
-  IProductRepository,
-  IProductService,
-  Product,
-} from "../types/product.types";
+import { IProductRepository, IProductService } from "../types/product.types";
 import asyncHandler from "../middleware/asyncHandler";
 
 const productRepository: IProductRepository = new ProductRepository();

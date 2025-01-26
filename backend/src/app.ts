@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { EnvConfiguration } from "./config/envConfig";
 import productRoutes from "./routes/product.routes";
 import userRoutes from "./routes/user.routes";
+import orderRoutes from "./routes/order.routes";
 import { notFound, errorHandler } from "./middleware/error.middleware";
 import "./config/db";
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

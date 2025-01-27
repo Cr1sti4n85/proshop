@@ -15,7 +15,7 @@ export const protect = asyncHandler(
     const jwtSecret = EnvConfiguration().jwtSecret as string;
 
     //Read the jwt from the cookie
-    token = req.headers.authorization?.split(" ")[1];
+    token = req.cookies.jwt;
 
     if (token) {
       try {

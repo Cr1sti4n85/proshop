@@ -86,7 +86,25 @@ export const getOrderById = asyncHandler(
 //@access Private
 export const updateOrderToPaid = asyncHandler(
   async (req: Request, res: Response) => {
-    res.send("Update order to paid");
+    const order = await orderService.findOrderById(req.params.id);
+
+    if (!order) {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+
+    order.isPaid = true;
+    order.paidAt = new Date(Date.now());
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      updateTime: req.body.update_time,
+      emailAddress: req.body.payer.email_address,
+    };
+
+    const updatedOrder = await orderService.updateOrder(req.params.id, order);
+
+    res.status(200).json(updatedOrder);
   }
 );
 

@@ -23,6 +23,7 @@ export interface PaymentResult {
   id: string;
   status: string;
   updateTime: string;
+  emailAddress: string;
 }
 
 export interface Order extends Document {

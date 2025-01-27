@@ -4,7 +4,7 @@ import { Product } from "./product.types";
 import { Query, Repository } from "./repository.types";
 
 export interface OrderItems {
-  _id?: string;
+  _id?: string | undefined;
   name: string;
   qty: number;
   image: string;

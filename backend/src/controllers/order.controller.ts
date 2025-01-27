@@ -33,9 +33,12 @@ export const addOrderItems = asyncHandler(
     }
 
     orderItems = orderItems.map((item) => ({
-      ...item,
+      name: item.name,
+      qty: item.qty,
+      image: item.image,
+      price: item.price,
       product: item._id,
-      _id: undefined,
+      // _id: undefined,
     }));
 
     const newOrder = await orderService.createOrder({

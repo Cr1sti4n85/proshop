@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { EnvConfiguration } from "./config/envConfig";
@@ -25,6 +25,11 @@ app.use(cookieParser());
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+
+app.get("/api/config/paypal", (_req: Request, res: Response) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+  return;
+});
 
 app.use(notFound);
 app.use(errorHandler);

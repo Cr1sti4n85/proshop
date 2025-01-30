@@ -62,7 +62,7 @@ export const registerUser = asyncHandler(
 );
 
 // @desc  Log out user / clear cookie
-// @route POST /api/users/logout
+// @route POST /api/users/
 // @access Private
 export const logoutUser = asyncHandler(async (_req: Request, res: Response) => {
   res.cookie("jwt", "", {

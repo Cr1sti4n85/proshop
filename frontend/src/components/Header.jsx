@@ -65,15 +65,15 @@ function Header() {
             )}
             {userInfo && userInfo.isAdmin && (
               <NavDropdown title="Admin" id="adminmenu">
-                <Nav.Link as={Link} to="/admin/productlist">
-                  <NavDropdown.Item>Products</NavDropdown.Item>
-                </Nav.Link>
-                <Nav.Link as={Link} to="/admin/userlist">
-                  <NavDropdown.Item>Users</NavDropdown.Item>
-                </Nav.Link>
-                <Nav.Link as={Link} to="/admin/orderlist">
-                  <NavDropdown.Item>Orders</NavDropdown.Item>
-                </Nav.Link>
+                <NavDropdown.Item as={Link} to="/admin/productlist">
+                  Products
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/userlist">
+                  Users
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/orderlist">
+                  Orders
+                </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

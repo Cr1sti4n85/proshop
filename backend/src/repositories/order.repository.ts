@@ -9,7 +9,7 @@ export class OrderRepository implements IOrderRepository {
   }
 
   async find(): Promise<Order[]> {
-    return await OrderModel.find().exec();
+    return await OrderModel.find().populate("user", "id name").exec();
   }
 
   async findOwn(query: Query): Promise<Order[]> {

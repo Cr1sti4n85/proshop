@@ -122,6 +122,7 @@ export const updateOrderToDelivered = asyncHandler(
 //@access Private/Admin
 export const getAllOrders = asyncHandler(
   async (req: Request, res: Response) => {
-    res.send("Get all orders");
+    const orders = await orderService.findOrders();
+    res.status(200).json(orders);
   }
 );

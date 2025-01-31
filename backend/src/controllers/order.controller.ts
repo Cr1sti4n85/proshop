@@ -113,7 +113,19 @@ export const updateOrderToPaid = asyncHandler(
 //@access Private/Admin
 export const updateOrderToDelivered = asyncHandler(
   async (req: Request, res: Response) => {
-    res.send("Update order to delivered");
+    const order = await orderService.findOrderById(req.params.id);
+
+    if (!order) {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+
+    order.isDelivered = true;
+    order.deliveredAt = new Date(Date.now());
+
+    const updatedOrder = await orderService.updateOrder(req.params.id, order);
+
+    res.status(200).json(updatedOrder);
   }
 );
 
@@ -121,7 +133,7 @@ export const updateOrderToDelivered = asyncHandler(
 //@route GET /api/orders
 //@access Private/Admin
 export const getAllOrders = asyncHandler(
-  async (req: Request, res: Response) => {
+  async (_req: Request, res: Response) => {
     const orders = await orderService.findOrders();
     res.status(200).json(orders);
   }

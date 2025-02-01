@@ -19,10 +19,23 @@ export interface Product extends Document {
   countInStock: number;
 }
 
+export type newProduct = Pick<
+  Product,
+  | "name"
+  | "price"
+  | "user"
+  | "image"
+  | "brand"
+  | "category"
+  | "countInStock"
+  | "numReviews"
+  | "description"
+>;
+
 export interface IProductRepository extends Repository<Product> {}
 
 export interface IProductService {
-  createProduct(data: Product): Promise<Product>;
+  createProduct(data: newProduct): Promise<Product>;
   findProducts(): Promise<Product[]>;
   findProductById(id: string): Promise<Product | null>;
   updateProduct(id: string, product: Partial<Product>): Promise<Product | null>;

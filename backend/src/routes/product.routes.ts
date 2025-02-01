@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { findProductById, findProducts } from "controllers/product.controller";
+import {
+  createProduct,
+  findProductById,
+  findProducts,
+} from "controllers/product.controller";
+import { protect, admin } from "middleware/auth.middleware";
 
 const router = Router();
 
-router.get("/", findProducts);
+router
+  .route("/")
+  .get(protect, findProducts)
+  .post(protect, admin, createProduct);
 
 router.get("/:id", findProductById);
 

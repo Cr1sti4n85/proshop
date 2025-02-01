@@ -39,3 +39,24 @@ export const findProductById = asyncHandler(
     }
   }
 );
+
+// @desc Create a product
+// @route POST /api/products
+// @access Private/admin
+export const createProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const createdProduct = await productService.createProduct({
+      name: "Sample name",
+      price: 0,
+      user: req.currentUser._id,
+      image: "/images/sample.jpg",
+      brand: "Sample brand",
+      category: "Sample category",
+      countInStock: 0,
+      numReviews: 0,
+      description: "Sample description",
+    });
+
+    res.status(201).json(createdProduct);
+  }
+);

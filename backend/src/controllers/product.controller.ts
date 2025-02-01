@@ -60,3 +60,24 @@ export const createProduct = asyncHandler(
     res.status(201).json(createdProduct);
   }
 );
+
+// @desc Update a product
+// @route PUT /api/products/:id
+// @access Private/admin
+export const updateProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const product = await productService.findProductById(req.params.id);
+
+    if (!product) {
+      res.status(404);
+      throw new Error("Product not found");
+    }
+
+    const updatedProduct = await productService.updateProduct(
+      req.params.id,
+      req.body
+    );
+
+    res.json(updatedProduct);
+  }
+);

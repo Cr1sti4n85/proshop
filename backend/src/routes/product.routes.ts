@@ -3,6 +3,7 @@ import {
   createProduct,
   findProductById,
   findProducts,
+  updateProduct,
 } from "controllers/product.controller";
 import { protect, admin } from "middleware/auth.middleware";
 
@@ -13,6 +14,6 @@ router
   .get(protect, findProducts)
   .post(protect, admin, createProduct);
 
-router.get("/:id", findProductById);
+router.route("/:id").get(findProductById).put(protect, admin, updateProduct);
 
 export default router;

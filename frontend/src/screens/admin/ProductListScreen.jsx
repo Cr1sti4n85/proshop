@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
-import { FaTimes, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -70,7 +70,12 @@ function ProductListScreen() {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <Button as={Link} variant="light" className="btn-sm mx-2">
+                    <Button
+                      as={Link}
+                      to={`/admin/product/${product._id}/edit`}
+                      variant="light"
+                      className="btn-sm mx-2"
+                    >
                       <FaEdit />
                     </Button>
                     <Button

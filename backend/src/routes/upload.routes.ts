@@ -1,6 +1,6 @@
 import path from "path";
-import { Router, Express, Response, Request } from "express";
-import multer from "multer";
+import { Router, Response, Request } from "express";
+import multer, { FileFilterCallback } from "multer";
 import { MulterFile } from "../types/multer.types";
 
 const router = Router();
@@ -22,8 +22,9 @@ const storage = multer.diskStorage({
 });
 
 function checkFileType(
+  _req: Request,
   file: MulterFile,
-  cb: (error: Error | null, acceptFile: boolean) => void
+  cb: FileFilterCallback
 ): void {
   const fileTypes: RegExp = /jpg|jpeg|png/;
   const extname: boolean = fileTypes.test(
@@ -38,15 +39,16 @@ function checkFileType(
       name: "format error",
       message: "Images only. Accepted formats: 'jpg/jpeg/png",
     };
-    cb(error, false);
+    cb(error);
   }
 }
 
 const upload = multer({
   storage,
+  fileFilter: checkFileType,
 });
 
-router.post("/", upload.single("image"), (req: Request, res: Response) => {
+router.put("/", upload.single("image"), (req: Request, res: Response) => {
   res.send({
     message: "Image Uploaded",
     image: `/${req.file?.path}`,

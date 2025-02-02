@@ -15,6 +15,7 @@ import Loader from "../components/Loader";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 import Message from "../components/Message";
+import { BASE_URL } from "../constants";
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -30,6 +31,8 @@ function ProductScreen() {
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId);
+
+  console.log(product);
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
@@ -49,7 +52,11 @@ function ProductScreen() {
       ) : (
         <Row>
           <Col md={5}>
-            <Image src={product.image} alt={product.name} fluid />
+            <Image
+              src={`${BASE_URL}${product.image}`}
+              alt={product.name}
+              fluid
+            />
           </Col>
           <Col md={4}>
             <ListGroup variant="flush">

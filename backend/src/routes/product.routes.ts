@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createProduct,
+  deleteProduct,
   findProductById,
   findProducts,
   updateProduct,
@@ -14,6 +15,10 @@ router
   .get(protect, findProducts)
   .post(protect, admin, createProduct);
 
-router.route("/:id").get(findProductById).put(protect, admin, updateProduct);
+router
+  .route("/:id")
+  .get(findProductById)
+  .put(protect, admin, updateProduct)
+  .delete(protect, admin, deleteProduct);
 
 export default router;

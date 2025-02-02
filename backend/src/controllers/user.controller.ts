@@ -128,28 +128,58 @@ export const updateProfile = asyncHandler(
 // @route GET /api/users
 // @access Private/admin
 export const getUsers = asyncHandler(async (_req: Request, res: Response) => {
-  res.status(200).json({ message: "Get users" });
-});
-
-// @desc  Delete user
-// @route DELETE /api/users/:id
-// @access Private/admin
-export const deleteUser = asyncHandler(async (_req: Request, res: Response) => {
-  res.status(200).json({ message: "Delete user" });
+  const users = await userService.findUsers();
+  res.status(200).json(users);
 });
 
 // @desc  Get user by id
 // @route GET /api/users/:id
 // @access Private/admin
-export const getUserById = asyncHandler(
-  async (_req: Request, res: Response) => {
-    res.status(200).json({ message: "Get user by id" });
+export const getUserById = asyncHandler(async (req: Request, res: Response) => {
+  const user = await userService.findUserById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("No user found");
   }
-);
+  res.status(200).json(user);
+});
+
+// @desc  Delete user
+// @route DELETE /api/users/:id
+// @access Private/admin
+export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
+  const user = await userService.findUserById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("No user found");
+  }
+  if (user.isAdmin) {
+    res.status(400);
+    throw new Error("Cannot delete admin user");
+  }
+  await userService.deleteUser(req.params.id);
+  res.status(200).json({ message: "User deleted successfully" });
+});
 
 // @desc  Update user
 // @route PUT /api/users/:id
 // @access Private/admin
-export const updateUser = asyncHandler(async (_req: Request, res: Response) => {
-  res.status(200).json({ message: "Update user" });
+export const updateUser = asyncHandler(async (req: Request, res: Response) => {
+  const { name, email, isAdmin } = req.body;
+  const updatedUser = await userService.updateUser(req.params.id, {
+    name,
+    email,
+    isAdmin,
+  });
+
+  if (!updatedUser) {
+    res.status(404);
+    throw new Error("No user found");
+  }
+  res.status(200).json({
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    isAdmin: updatedUser.isAdmin,
+  });
 });

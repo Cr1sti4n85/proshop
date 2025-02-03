@@ -17,7 +17,8 @@ function UserListScreen() {
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
-        await deleteUser(id);
+        const res = await deleteUser(id);
+        if (res.error) throw res.error;
         toast.success("User deleted");
         refetch();
       } catch (error) {
@@ -69,7 +70,7 @@ function UserListScreen() {
                     variant="light"
                     className="btn-sm"
                     as={Link}
-                    to={`/admin/user${user._id}/edit`}
+                    to={`/admin/user/${user._id}/edit`}
                   >
                     <FaEdit />
                   </Button>

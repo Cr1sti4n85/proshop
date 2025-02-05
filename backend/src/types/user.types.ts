@@ -3,7 +3,7 @@ import { Query, Repository } from "./repository.types";
 
 //name, email, password, isAdmin
 export interface User extends Document {
-  _id: mongoose.Types.ObjectId;
+  _id: string;
   name: string;
   email: string;
   password: string;

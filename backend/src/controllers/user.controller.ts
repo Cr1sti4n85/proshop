@@ -76,7 +76,7 @@ export const logoutUser = asyncHandler(async (_req: Request, res: Response) => {
 // @route Get /api/users/profile
 // @access Private
 export const getProfile = asyncHandler(async (req: Request, res: Response) => {
-  const id = req.currentUser?._id as string;
+  const id = req.currentUser?._id;
   const user = await userService.findUserById(id);
 
   if (user) {

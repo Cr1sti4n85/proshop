@@ -5,7 +5,6 @@ import {
   currentOrder,
   IOrderRepository,
   IOrderService,
-  Order,
 } from "../types/order.types";
 import asyncHandler from "../middleware/asyncHandler";
 

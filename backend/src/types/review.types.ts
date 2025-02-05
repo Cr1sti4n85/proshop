@@ -4,7 +4,7 @@ import { Repository } from "./repository.types";
 
 //user, name, rating, comments
 export interface Review extends Document {
-  user: mongoose.Types.ObjectId;
+  user: User["_id"];
   name: string;
   rating: number;
   comment: string;

@@ -32,11 +32,19 @@ export type newProduct = Pick<
   | "description"
 >;
 
-export interface IProductRepository extends Repository<Product> {}
+export interface PaginatedProducts {
+  products: Product[];
+  page: number;
+  pages: number;
+}
+
+export interface IProductRepository extends Repository<Product> {
+  findAllPaginated(pageSize: number, page: number): Promise<PaginatedProducts>;
+}
 
 export interface IProductService {
   createProduct(data: newProduct): Promise<Product>;
-  findProducts(): Promise<Product[]>;
+  findProducts(pageSize: number, page: number): Promise<PaginatedProducts>;
   findProductById(id: string): Promise<Product | null>;
   updateProduct(id: string, product: Partial<Product>): Promise<Product | null>;
   deleteProduct(id: string): Promise<boolean>;

@@ -1,6 +1,7 @@
 import {
   IProductRepository,
   IProductService,
+  PaginatedProducts,
   Product,
 } from "../types/product.types";
 
@@ -11,8 +12,11 @@ export class ProductService implements IProductService {
     return this.productRepository.create(data);
   }
 
-  async findProducts(): Promise<Product[]> {
-    return this.productRepository.find();
+  async findProducts(
+    pageSize: number,
+    page: number
+  ): Promise<PaginatedProducts> {
+    return this.productRepository.findAllPaginated(pageSize, page);
   }
 
   async findProductById(id: string): Promise<Product | null> {

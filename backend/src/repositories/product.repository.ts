@@ -1,5 +1,9 @@
 import ProductModel from "../models/product.model";
-import { IProductRepository, Product } from "../types/product.types";
+import {
+  IProductRepository,
+  PaginatedProducts,
+  Product,
+} from "../types/product.types";
 
 export class ProductRepository implements IProductRepository {
   async create(data: Product): Promise<Product> {
@@ -8,7 +12,20 @@ export class ProductRepository implements IProductRepository {
   }
 
   async find(): Promise<Product[]> {
-    return await ProductModel.find().exec();
+    return await ProductModel.find();
+  }
+
+  async findAllPaginated(
+    pageSize: number,
+    page: number
+  ): Promise<PaginatedProducts> {
+    const count = await ProductModel.countDocuments();
+    const products = await ProductModel.find()
+      .limit(pageSize)
+      .skip(pageSize * (page - 1))
+      .exec();
+
+    return { products, page, pages: Math.ceil(count / pageSize) };
   }
 
   async findById(id: string): Promise<Product | null> {
@@ -16,8 +33,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   async update(id: string, data: Partial<Product>): Promise<Product | null> {
-    return await ProductModel.findByIdAndUpdate(id, data, { new: true })
-    .exec();
+    return await ProductModel.findByIdAndUpdate(id, data, { new: true }).exec();
   }
 
   async delete(id: string): Promise<boolean> {

@@ -2,7 +2,7 @@
 //rating, numReviews, price, countInStock
 import { Document } from "mongoose";
 import { User } from "./user.types";
-import { Review } from "./review.types";
+import { currentReview } from "./review.types";
 import { Repository } from "./repository.types";
 
 export interface Product extends Document {
@@ -13,7 +13,7 @@ export interface Product extends Document {
   category: string;
   description: string;
   rating: number;
-  reviews: Review;
+  reviews: currentReview[];
   numReviews: number;
   price: number;
   countInStock: number;

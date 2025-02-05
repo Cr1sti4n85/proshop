@@ -1,8 +1,9 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { Query, Repository } from "./repository.types";
 
 //name, email, password, isAdmin
 export interface User extends Document {
+  _id: mongoose.Types.ObjectId;
   name: string;
   email: string;
   password: string;

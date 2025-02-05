@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-// import axios from "axios";
+import Paginate from "../components/Paginate";
 // import products from "../products";
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
@@ -29,6 +29,7 @@ function HomeScreen() {
               </Col>
             ))}
           </Row>
+          <Paginate pages={data.pages} page={data.page} />
         </>
       )}
     </>

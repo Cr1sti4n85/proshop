@@ -1,7 +1,7 @@
 import { Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function Paginate({ pages, page, isAdmin = false }) {
+function Paginate({ pages, page, isAdmin = false, keyword = "" }) {
   return (
     pages > 1 && (
       <Pagination>
@@ -13,7 +13,9 @@ function Paginate({ pages, page, isAdmin = false }) {
               as={Link}
               to={
                 !isAdmin
-                  ? `/page/${currentPage + 1}`
+                  ? keyword
+                    ? `/search/${keyword}/page/${currentPage + 1}`
+                    : `/page/${currentPage + 1}`
                   : `/admin/productlist/${currentPage + 1}`
               }
             >

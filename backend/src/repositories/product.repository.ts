@@ -17,15 +17,25 @@ export class ProductRepository implements IProductRepository {
 
   async findAllPaginated(
     pageSize: number,
-    page: number
+    page: number,
+    keyword: string
   ): Promise<PaginatedProducts> {
-    const count = await ProductModel.countDocuments();
-    const products = await ProductModel.find()
-      .limit(pageSize)
-      .skip(pageSize * (page - 1))
-      .exec();
-
-    return { products, page, pages: Math.ceil(count / pageSize) };
+    if (keyword) {
+      const queryObj = { name: { $regex: keyword, $options: "i" } };
+      const count = await ProductModel.countDocuments({ ...queryObj });
+      const products = await ProductModel.find({ ...queryObj })
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))
+        .exec();
+      return { products, page, pages: Math.ceil(count / pageSize) };
+    } else {
+      const count = await ProductModel.countDocuments();
+      const products = await ProductModel.find()
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))
+        .exec();
+      return { products, page, pages: Math.ceil(count / pageSize) };
+    }
   }
 
   async findById(id: string): Promise<Product | null> {

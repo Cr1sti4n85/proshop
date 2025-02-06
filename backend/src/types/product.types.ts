@@ -39,12 +39,20 @@ export interface PaginatedProducts {
 }
 
 export interface IProductRepository extends Repository<Product> {
-  findAllPaginated(pageSize: number, page: number): Promise<PaginatedProducts>;
+  findAllPaginated(
+    pageSize: number,
+    page: number,
+    keyword: string
+  ): Promise<PaginatedProducts>;
 }
 
 export interface IProductService {
   createProduct(data: newProduct): Promise<Product>;
-  findProducts(pageSize: number, page: number): Promise<PaginatedProducts>;
+  findProducts(
+    pageSize: number,
+    page: number,
+    keyword: string
+  ): Promise<PaginatedProducts>;
   findProductById(id: string): Promise<Product | null>;
   updateProduct(id: string, product: Partial<Product>): Promise<Product | null>;
   deleteProduct(id: string): Promise<boolean>;

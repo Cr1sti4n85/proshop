@@ -14,7 +14,9 @@ export const findProducts = asyncHandler(
   async (req: Request, res: Response) => {
     const pageSize = 2;
     const page = Number(req.query.pageNumber) || 1;
-    const products = await productService.findProducts(pageSize, page);
+    const keyword =
+      typeof req.query.keyword === "string" ? req.query.keyword : "";
+    const products = await productService.findProducts(pageSize, page, keyword);
 
     if (!products) {
       res.status(404).json({ message: "No products found" });

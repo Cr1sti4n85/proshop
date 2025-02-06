@@ -14,9 +14,10 @@ export class ProductService implements IProductService {
 
   async findProducts(
     pageSize: number,
-    page: number
+    page: number,
+    keyword: string
   ): Promise<PaginatedProducts> {
-    return this.productRepository.findAllPaginated(pageSize, page);
+    return this.productRepository.findAllPaginated(pageSize, page, keyword);
   }
 
   async findProductById(id: string): Promise<Product | null> {

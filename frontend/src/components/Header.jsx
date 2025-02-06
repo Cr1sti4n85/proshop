@@ -7,6 +7,7 @@ import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
 import logo from "../assets/logo.png";
+import SearchBox from "./SearchBox";
 
 function Header() {
   //useSelector puede acceder a propiedades de cart
@@ -39,6 +40,7 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
           <Nav className="ms-auto">
+            <SearchBox />
             <Nav.Link as={Link} to="/cart">
               <FaShoppingCart />
               Cart

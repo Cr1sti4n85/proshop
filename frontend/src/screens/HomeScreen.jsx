@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 // import products from "../products";
 import Product from "../components/Product";
@@ -16,6 +16,11 @@ function HomeScreen() {
 
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-light mb-4">
+          Go Back
+        </Link>
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (

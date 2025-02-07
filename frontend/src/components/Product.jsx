@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import { BASE_URL } from "../constants";
 
-function Products({ product }) {
+function Product({ product }) {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>
@@ -28,4 +28,4 @@ function Products({ product }) {
   );
 }
 
-export default Products;
+export default Product;

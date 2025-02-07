@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -22,6 +22,9 @@ import Message from "../components/Message";
 import { BASE_URL } from "../constants";
 
 function ProductScreen() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { id: productId } = useParams();
 
   const dispatch = useDispatch();

@@ -44,6 +44,8 @@ export interface IProductRepository extends Repository<Product> {
     page: number,
     keyword: string
   ): Promise<PaginatedProducts>;
+
+  findTop(): Promise<Product[]>;
 }
 
 export interface IProductService {
@@ -53,6 +55,7 @@ export interface IProductService {
     page: number,
     keyword: string
   ): Promise<PaginatedProducts>;
+  findTopProducts(): Promise<Product[]>;
   findProductById(id: string): Promise<Product | null>;
   updateProduct(id: string, product: Partial<Product>): Promise<Product | null>;
   deleteProduct(id: string): Promise<boolean>;

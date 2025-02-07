@@ -6,12 +6,15 @@ import {
   findProducts,
   updateProduct,
   createProductReview,
+  getTopProducts,
 } from "controllers/product.controller";
 import { protect, admin } from "middleware/auth.middleware";
 
 const router = Router();
 
 router.route("/").get(findProducts).post(protect, admin, createProduct);
+
+router.get("/top", getTopProducts);
 
 router
   .route("/:id")

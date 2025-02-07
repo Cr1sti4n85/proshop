@@ -44,6 +44,17 @@ export const findProductById = asyncHandler(
   }
 );
 
+// @desc Get top rated products
+// @route GET /api/products/:id
+// @access Public
+export const getTopProducts = asyncHandler(
+  async (req: Request, res: Response) => {
+    const products = await productService.findTopProducts();
+
+    res.status(200).json(products);
+  }
+);
+
 // @desc Create a product
 // @route POST /api/products
 // @access Private/admin

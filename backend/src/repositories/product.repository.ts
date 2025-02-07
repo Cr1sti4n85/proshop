@@ -12,7 +12,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   async find(): Promise<Product[]> {
-    return await ProductModel.find();
+    return await ProductModel.find({}).exec();
   }
 
   async findAllPaginated(
@@ -36,6 +36,11 @@ export class ProductRepository implements IProductRepository {
         .exec();
       return { products, page, pages: Math.ceil(count / pageSize) };
     }
+  }
+
+  async findTop(): Promise<Product[]> {
+    const products = await ProductModel.find({}).sort({ rating: -1 }).limit(3);
+    return products;
   }
 
   async findById(id: string): Promise<Product | null> {

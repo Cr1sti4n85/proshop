@@ -20,6 +20,10 @@ export class ProductService implements IProductService {
     return this.productRepository.findAllPaginated(pageSize, page, keyword);
   }
 
+  async findTopProducts(): Promise<Product[]> {
+    return this.productRepository.findTop();
+  }
+
   async findProductById(id: string): Promise<Product | null> {
     return this.productRepository.findById(id);
   }

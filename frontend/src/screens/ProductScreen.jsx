@@ -11,14 +11,15 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Rating from "../components/Rating";
-import Loader from "../components/Loader";
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
+import Loader from "../components/Loader";
+import Rating from "../components/Rating";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 import { BASE_URL } from "../constants";
 
 function ProductScreen() {
@@ -78,6 +79,7 @@ function ProductScreen() {
         </Message>
       ) : (
         <>
+          <Meta title={product.name} />
           <Row>
             <Col md={5}>
               <Image

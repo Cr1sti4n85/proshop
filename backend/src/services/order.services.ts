@@ -13,6 +13,9 @@ export class OrderService implements IOrderService {
   }
 
   async findOrders(): Promise<Order[]> {
+    if (!this.orderRepository.find) {
+      throw new Error("Method not implemented");
+    }
     return this.orderRepository.find();
   }
 

@@ -11,9 +11,9 @@ export class ProductRepository implements IProductRepository {
     return await newProduct.save();
   }
 
-  async find(): Promise<Product[]> {
-    return await ProductModel.find({}).exec();
-  }
+  // async find(): Promise<Product[]> {
+  //   return await ProductModel.find({}).exec();
+  // }
 
   async findAllPaginated(
     pageSize: number,

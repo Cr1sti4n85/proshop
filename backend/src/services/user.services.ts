@@ -8,6 +8,9 @@ export class UserService implements IUserService {
   }
 
   async findUsers(): Promise<User[]> {
+    if (!this.userRepository.find) {
+      throw new Error("Find method not implemented");
+    }
     return this.userRepository.find();
   }
 

@@ -1,6 +1,6 @@
 export interface Repository<T = unknown> {
   create(data: T): Promise<T>;
-  find(): Promise<T[]>;
+  find?(): Promise<T[]>;
   // find(
   //   U: number,
   //   V: number

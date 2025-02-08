@@ -5,7 +5,7 @@
 
     /* Modules */
     "moduleDetection": "force",
-    "module": "Preserve" /* Specify what module code is generated. */,
+    "module": "CommonJS" /* Specify what module code is generated. */,
     "rootDir": "./backend/src" /* Specify the root folder within your source files. */,
     "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
     "outDir": "./backend/dist" /* Specify an output folder for all emitted files. */,

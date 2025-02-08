@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "eCommerce app built with MERN",
   "main": "./backend/dist/app.js",
-  "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "tsx ./backend/dist/app.js",
+    "start": "node ./backend/dist/app.js",
     "server": "tsx watch backend/src/app.ts",
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

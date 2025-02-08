@@ -16,7 +16,7 @@ export const authUser = asyncHandler(async (req: Request, res: Response) => {
   const user = await userService.findUserByEmail(email);
 
   if (user && (await user.matchPassword(password)) && user._id) {
-    generateToken(res, user._id);
+    generateToken(res, user._id.toString());
 
     res.json({
       _id: user._id,
@@ -46,7 +46,7 @@ export const registerUser = asyncHandler(
 
     const user = await userService.createUser({ name, email, password });
     if (user && user._id) {
-      generateToken(res, user._id);
+      generateToken(res, user._id.toString());
 
       res.status(201).json({
         _id: user._id,
@@ -77,7 +77,7 @@ export const logoutUser = asyncHandler(async (_req: Request, res: Response) => {
 // @access Private
 export const getProfile = asyncHandler(async (req: Request, res: Response) => {
   const id = req.currentUser?._id;
-  const user = await userService.findUserById(id);
+  const user = await userService.findUserById(id.toString());
 
   if (user) {
     res.status(200).json({
@@ -97,7 +97,7 @@ export const getProfile = asyncHandler(async (req: Request, res: Response) => {
 // @access Private
 export const updateProfile = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.currentUser?._id as string;
+    const id = req.currentUser?._id.toString();
     const user = await userService.findUserById(id);
 
     if (user) {
@@ -157,7 +157,6 @@ export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
     res.status(400);
     throw new Error("Cannot delete admin user");
   }
-  console.log("after checking is admin", user);
   await userService.deleteUser(req.params.id);
   res.status(200).json({ message: "User deleted successfully" });
 });

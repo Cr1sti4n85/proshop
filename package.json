@@ -4,7 +4,7 @@
   "description": "eCommerce app built with MERN",
   "main": "./backend/dist/app.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm install && tsc && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "node ./backend/dist/app.js",
     "server": "tsx watch backend/src/app.ts",
     "client": "npm run dev --prefix frontend",

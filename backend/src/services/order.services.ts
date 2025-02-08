@@ -1,4 +1,4 @@
-import { Query } from "types/repository.types";
+import { Query } from "../types/repository.types";
 import { IOrderRepository, IOrderService, Order } from "../types/order.types";
 
 export class OrderService implements IOrderService {

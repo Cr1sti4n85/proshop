@@ -1,4 +1,4 @@
-import { Query } from "types/repository.types";
+import { Query } from "../types/repository.types";
 import OrderModel from "../models/order.model";
 import { IOrderRepository, Order } from "../types/order.types";
 

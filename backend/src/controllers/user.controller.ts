@@ -3,7 +3,7 @@ import { UserRepository } from "../repositories/user.repository";
 import { UserService } from "../services/user.services";
 import { IUserRepository, IUserService, User } from "../types/user.types";
 import asyncHandler from "../middleware/asyncHandler";
-import { generateToken } from "helpers/generateToken";
+import { generateToken } from "../helpers/generateToken";
 
 const userRepository: IUserRepository = new UserRepository();
 const userService: IUserService = new UserService(userRepository);

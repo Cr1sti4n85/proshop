@@ -7,8 +7,8 @@ import {
   updateProduct,
   createProductReview,
   getTopProducts,
-} from "controllers/product.controller";
-import { protect, admin } from "middleware/auth.middleware";
+} from "../controllers/product.controller";
+import { protect, admin } from "../middleware/auth.middleware";
 
 const router = Router();
 

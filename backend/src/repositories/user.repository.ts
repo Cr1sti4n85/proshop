@@ -1,4 +1,4 @@
-import { Query } from "types/repository.types";
+import { Query } from "../types/repository.types";
 import UserModel from "../models/user.model";
 import { IUserRepository, User } from "../types/user.types";
 

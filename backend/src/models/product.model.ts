@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { Product } from "types/product.types";
-import { Review } from "types/review.types";
+import { Product } from "../types/product.types";
+import { Review } from "../types/review.types";
 
 const ReviewSchema = new Schema<Review>(
   {

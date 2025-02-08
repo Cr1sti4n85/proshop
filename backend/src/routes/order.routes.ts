@@ -6,7 +6,7 @@ import {
   updateOrderToDelivered,
   updateOrderToPaid,
   addOrderItems,
-} from "controllers/order.controller";
+} from "../controllers/order.controller";
 import { protect, admin } from "../middleware/auth.middleware";
 
 const router = Router();

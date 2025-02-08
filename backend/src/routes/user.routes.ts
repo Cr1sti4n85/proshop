@@ -9,7 +9,7 @@ import {
   deleteUser,
   updateProfile,
   updateUser,
-} from "controllers/user.controller";
+} from "../controllers/user.controller";
 import { protect, admin } from "../middleware/auth.middleware";
 
 const router = Router();

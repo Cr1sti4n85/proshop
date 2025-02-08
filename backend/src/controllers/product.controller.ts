@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ProductRepository } from "../repositories/product.repository";
 import { ProductService } from "../services/product.services";
 import { IProductRepository, IProductService } from "../types/product.types";
+import { EnvConfiguration } from "../config/envConfig";
 import asyncHandler from "../middleware/asyncHandler";
 
 const productRepository: IProductRepository = new ProductRepository();
@@ -12,7 +13,8 @@ const productService: IProductService = new ProductService(productRepository);
 // @access Public
 export const findProducts = asyncHandler(
   async (req: Request, res: Response) => {
-    const pageSize = 2;
+    const pageSize = Number(EnvConfiguration().pageSize);
+    console.log(pageSize);
     const page = Number(req.query.pageNumber) || 1;
     const keyword =
       typeof req.query.keyword === "string" ? req.query.keyword : "";

@@ -6,6 +6,7 @@ const {
   VITE_NODE_ENV: NODE_ENV,
   MONGO_URI: mongoUri,
   JWT_SECRET: jwtSecret,
+  PAGINATION_LIMIT: pageSize = 2,
 } = process.env;
 
 export const EnvConfiguration = () => ({
@@ -13,4 +14,5 @@ export const EnvConfiguration = () => ({
   NODE_ENV,
   mongoUri,
   jwtSecret,
+  pageSize,
 });

@@ -8,6 +8,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import Loader from "../components/Loader";
 import { useCreateOrderMutation } from "../slices/ordersApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
+import { BASE_URL } from "../constants";
 
 const PlaceOrderScreen = () => {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ const PlaceOrderScreen = () => {
                       <Row>
                         <Col md={1}>
                           <Image
-                            src={item.image}
+                            src={`${BASE_URL}${item.image}`}
                             alt={item.name}
                             fluid
                             rounded

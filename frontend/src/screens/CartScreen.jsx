@@ -12,6 +12,7 @@ import {
 import { FaTrash } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import Message from "../components/Message";
+import { BASE_URL } from "../constants";
 
 function CartScreen() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ function CartScreen() {
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={item.image}
+                      src={`${BASE_URL}${item.image}`}
                       alt={item.name}
                       fluid
                       rounded

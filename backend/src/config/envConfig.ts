@@ -1,5 +1,5 @@
-// import { loadEnvFile } from "process";
-// loadEnvFile();
+import { loadEnvFile } from "process";
+loadEnvFile();
 
 const {
   PORT: port,

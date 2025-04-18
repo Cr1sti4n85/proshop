@@ -12,6 +12,7 @@ import {
   useGetPayPalClientIdQuery,
   useDeliverOrderMutation,
 } from "../slices/ordersApiSlice";
+import { BASE_URL } from "../constants";
 
 function OrderScreen() {
   const { id: orderId } = useParams();
@@ -156,7 +157,12 @@ function OrderScreen() {
                 <ListGroup.Item key={index}>
                   <Row>
                     <Col md={1}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
+                      <Image
+                        src={`${BASE_URL}${item.image}`}
+                        alt={item.name}
+                        fluid
+                        rounded
+                      />
                     </Col>
                     <Col>
                       <Link to={`/products/${item.product}`}>{item.name}</Link>

@@ -1,5 +1,12 @@
 import { loadEnvFile } from "process";
-loadEnvFile();
+import fs from "fs";
+import path from "path";
+
+// Cargar .env solo si el archivo existe
+const envPath = path.resolve(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  loadEnvFile();
+}
 
 const {
   PORT: port,
